@@ -28,6 +28,10 @@
     --backdrop: hsla(0,0%,9%,.2)
 }
 
+input:focus{
+    border: 1px solid var(--main);
+}
+
 a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video {
     margin: 0;
     padding: 0;
@@ -2683,7 +2687,7 @@ footer.bg-main .footer-heading,footer.bg-main .footer-info li i,footer.bg-main .
 }
 
 footer.bg-main .tf-cart-checkbox label,footer.bg-main p {
-    color: var(--secondary-2)
+    color: var(--white)
 }
 
 footer.bg-main .footer-newsletter p a {
@@ -2691,7 +2695,7 @@ footer.bg-main .footer-newsletter p a {
 }
 
 footer.bg-main .footer-menu .footer-menu_item {
-    color: var(--secondary-2)
+    color: var(--white)
 }
 
 footer.bg-main .footer-menu .footer-menu_item:hover {
@@ -17372,3 +17376,23 @@ ul.list-text.type-number {
     transform: translateY(0)!important;
     opacity: 1!important
 }
+
+@layer base {
+  :root {
+        --sidebar-background: 0 0% 98%;
+        --sidebar-foreground: 240 5.3% 26.1%;
+        --sidebar-primary: 240 5.9% 10%;
+        --sidebar-primary-foreground: 0 0% 98%;
+        --sidebar-accent: 240 4.8% 95.9%;
+        --sidebar-accent-foreground: 240 5.9% 10%;
+        --sidebar-border: 220 13% 91%;
+        --sidebar-ring: 217.2 91.2% 59.8%}
+  .dark {
+        --sidebar-background: 240 5.9% 10%;
+        --sidebar-foreground: 240 4.8% 95.9%;
+        --sidebar-primary: 224.3 76.3% 48%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent: 240 3.7% 15.9%;
+        --sidebar-accent-foreground: 240 4.8% 95.9%;
+        --sidebar-border: 240 3.7% 15.9%;
+        --sidebar-ring: 217.2 91.2% 59.8%}}

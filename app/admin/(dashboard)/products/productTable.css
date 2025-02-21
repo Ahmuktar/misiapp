@@ -1,0 +1,54 @@
+.datatable-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.datatable-top .datatable-dropdown .datatable-selector {
+  font-weight: normal;
+  white-space: nowrap;
+  border: 2px solid #e9e9e9;
+  padding: 5px;
+}
+
+.datatable-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.datatable-bottom .datatable-pagination-list {
+  display: flex;
+}
+
+.datatable-bottom
+  .datatable-pagination-list
+  .datatable-pagination-list-item
+  button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8392ab;
+  background: transparent;
+  padding: 0;
+  margin: 0 3px;
+  border: 1px solid #dee2e6;
+  border-radius: 50% !important;
+  width: 36px;
+  height: 36px;
+  font-size: 0.875rem;
+  margin-left: 0;
+}
+
+.datatable-bottom
+  .datatable-pagination-list
+  .datatable-pagination-list-item.datatable-active
+  button {
+  background-color: var(--main);
+  color: #fff;
+  border: none !important;
+  border-radius: 50% !important;
+}

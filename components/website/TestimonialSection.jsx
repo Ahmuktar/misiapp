@@ -2,7 +2,7 @@ import React from "react";
 
 const TestimonialSection = () => {
   return (
-    <section>
+    <section data-aos="fade-up">
       <div className="container">
         <div className="heading-section text-center wow fadeInUp">
           <h3 className="heading">Customer Say!</h3>
@@ -12,6 +12,7 @@ const TestimonialSection = () => {
           </p>
         </div>
         <div
+          data-aos="fade-right"
           dir="ltr"
           className="swiper tf-sw-testimonial wow fadeInUp"
           data-wow-delay="0.1s"

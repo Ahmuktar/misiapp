@@ -2,7 +2,7 @@ import React from "react";
 
 const InstagramGallery = () => {
   return (
-    <section className="flat-spacing">
+    <section className="flat-spacing" data-aos="fade-up">
       <div className="container">
         <div className="heading-section text-center wow fadeInUp">
           <h3 className="heading">Shop Instagram</h3>
@@ -11,6 +11,7 @@ const InstagramGallery = () => {
           </p>
         </div>
         <div
+          data-aos="fade-left"
           dir="ltr"
           className="swiper tf-sw-shop-gallery"
           data-preview={5}

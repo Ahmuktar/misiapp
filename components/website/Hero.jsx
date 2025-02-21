@@ -71,7 +71,7 @@ export default function Hero() {
       <div className="relative -mt-20 z-10 flex flex-col items-center justify-center h-full px-4 text-center">
         <div className="">
           {/* Logo and Decorative Line */}
-          <div className="">
+          <div className="" data-aos="fade-up">
             <img
               src="/assets/images/logo/logo.png"
               alt="logo"
@@ -80,14 +80,14 @@ export default function Hero() {
           </div>
 
           {/* Main Title */}
-          <div className="mt-10">
+          <div className="mt-10" data-aos="fade-left">
             <p className="hero-subtitle text-lg md:text-xl text-[#E6B94C] max-w-xl mx-auto font-light tracking-wider">
               Luxury • Fashion • Bespoke
             </p>
           </div>
 
           {/* CTA Button */}
-          <div className="mt-10">
+          <div className="mt-10" data-aos="fade-right">
             <button className="hero-button group relative overflow-hidden bg-transparent border-2 border-[#E6B94C] text-[#E6B94C] px-12 py-4 text-lg tracking-widest uppercase hover:text-black transition-colors duration-500">
               <span className="relative z-10">Discover Collection</span>
               <div className="absolute inset-0 bg-[#E6B94C] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
@@ -96,7 +96,9 @@ export default function Hero() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="scroll-indicator absolute bottom-0 flex flex-col items-center space-y-2">
+        <div
+          className="scroll-indicator absolute bottom-0 flex flex-col items-center space-y-2"
+        >
           <span className="text-[#E6B94C] text-sm tracking-widest">SCROLL</span>
           <ChevronDown className="w-6 h-6 text-[#E6B94C]" />
         </div>

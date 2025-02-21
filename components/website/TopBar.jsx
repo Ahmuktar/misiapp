@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 function TopBar() {
@@ -20,12 +21,12 @@ function TopBar() {
               </a>
             </li>
             <li>
-              <a
+              <Link
                 className="text-caption-1 text-white text-decoration-underline"
-                href="#"
+                href="/store-list"
               >
                 Our Store
-              </a>
+              </Link>
             </li>
           </ul>
           <div className="topbar-right d-none d-xl-block">

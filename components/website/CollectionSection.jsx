@@ -2,34 +2,54 @@ import React from "react";
 
 const CollectionItem = ({ collection }) => {
   return (
-    <div className="swiper-slide">
-      <div className="collection-circle hover-img">
-        <a href="shop-collection.html" className="img-style">
+    <div
+      className="swiper-slide"
+      role="group"
+      aria-label="1 / 8"
+      style={{ width: "321.875px", marginRight: 20 }}
+    >
+      <div className="collection-position-2 hover-img">
+        <a className="img-style">
           <img
-            className="lazyload"
+            className="ls-is-cached lazyloaded"
             data-src={collection.image}
             src={collection.image}
-            alt="collection-img"
+            alt="banner-cls"
           />
         </a>
-        <div className="collection-content text-center">
-          <div>
-            <a href="shop-collection.html" className="cls-title">
-              <h6 className="text">{collection.title}</h6>
-              <i className="icon icon-arrowUpRight" />
-            </a>
-          </div>
-          <div className="count text-secondary">{collection.items} items</div>
+        <div className="content">
+          <a href="shop-collection.html" className="cls-btn">
+            <h6 className="text">{collection.title}</h6>
+            <i className="icon icon-arrowUpRight" />
+          </a>
         </div>
       </div>
     </div>
   );
 };
 
+const collections = [
+  { image: "/assets/images/misi/MISI 27.jpg", title: "New in" },
+  { image: "/assets/images/misi/MISI 42.jpg", title: "Promotion" },
+  { image: "/assets/images/misi/MISI 46.jpeg", title: "Clothing" },
+  {
+    image: "/assets/images/misi/shoes.jpg",
+    title: "Shoes",
+  },
+  {
+    image: "/assets/images/misi/bags.jpg",
+    title: "Bags",
+  },
+  {
+    image: "/assets/images/misi/accessories.jpg",
+    title: "Accessories",
+  },
+];
+
 const CollectionSection = () => {
   // const collections = dummyData.categories;
   return (
-    <section className="flat-spacing">
+    <section className="flat-spacing" data-aos="fade-up">
       <div className="container">
         <div
           className="heading-section-2 wow fadeInUp"
@@ -72,198 +92,9 @@ const CollectionSection = () => {
               transitionDuration: "0ms",
             }}
           >
-            {/* 1 */}
-            <div
-              className="swiper-slide swiper-slide-active"
-              role="group"
-              aria-label="1 / 8"
-              style={{ width: "321.875px", marginRight: 20 }}
-            >
-              <div className="collection-position-2 hover-img">
-                <a className="img-style">
-                  <img
-                    className=" ls-is-cached lazyloaded"
-                    data-src="/assets/images/collections/cls1.jpg"
-                    src="/assets/images/collections/cls1.jpg"
-                    alt="banner-cls"
-                  />
-                </a>
-                <div className="content">
-                  <a href="shop-collection.html" className="cls-btn">
-                    <h6 className="text">New in</h6>
-                    <i className="icon icon-arrowUpRight" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            {/* 2 */}
-            <div
-              className="swiper-slide swiper-slide-next"
-              role="group"
-              aria-label="2 / 8"
-              style={{ width: "321.875px", marginRight: 20 }}
-            >
-              <div className="collection-position-2 hover-img">
-                <a className="img-style">
-                  <img
-                    className=" ls-is-cached lazyloaded"
-                    data-src="/assets/images/collections/cls2.jpg"
-                    src="/assets/images/collections/cls2.jpg"
-                    alt="banner-cls"
-                  />
-                </a>
-                <div className="content">
-                  <a href="shop-collection.html" className="cls-btn">
-                    <h6 className="text">Promotion</h6>
-                    <i className="icon icon-arrowUpRight" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            {/* 3 */}
-            <div
-              className="swiper-slide"
-              role="group"
-              aria-label="3 / 8"
-              style={{ width: "321.875px", marginRight: 20 }}
-            >
-              <div className="collection-position-2 hover-img">
-                <a className="img-style">
-                  <img
-                    className=" ls-is-cached lazyloaded"
-                    data-src="/assets/images/collections/cls6.jpg"
-                    src="/assets/images/collections/cls6.jpg"
-                    alt="banner-cls"
-                  />
-                </a>
-                <div className="content">
-                  <a href="shop-collection.html" className="cls-btn">
-                    <h6 className="text">Clothing</h6>
-                    <i className="icon icon-arrowUpRight" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            {/* 4 */}
-            <div
-              className="swiper-slide"
-              role="group"
-              aria-label="4 / 8"
-              style={{ width: "321.875px", marginRight: 20 }}
-            >
-              <div className="collection-position-2 hover-img">
-                <a className="img-style">
-                  <img
-                    className=" ls-is-cached lazyloaded"
-                    data-src="/assets/images/collections/cls4.jpg"
-                    src="/assets/images/collections/cls4.jpg"
-                    alt="banner-cls"
-                  />
-                </a>
-                <div className="content">
-                  <a href="shop-collection.html" className="cls-btn">
-                    <h6 className="text">Shoes</h6>
-                    <i className="icon icon-arrowUpRight" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            {/* 5 */}
-            <div
-              className="swiper-slide"
-              role="group"
-              aria-label="5 / 8"
-              style={{ width: "321.875px", marginRight: 20 }}
-            >
-              <div className="collection-position-2 hover-img">
-                <a className="img-style">
-                  <img
-                    className=" ls-is-cached lazyloaded"
-                    data-src="/assets/images/collections/cls5.jpg"
-                    src="/assets/images/collections/cls5.jpg"
-                    alt="banner-cls"
-                  />
-                </a>
-                <div className="content">
-                  <a href="shop-collection.html" className="cls-btn">
-                    <h6 className="text">Bags</h6>
-                    <i className="icon icon-arrowUpRight" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            {/* 6 */}
-            <div
-              className="swiper-slide"
-              role="group"
-              aria-label="6 / 8"
-              style={{ width: "321.875px", marginRight: 20 }}
-            >
-              <div className="collection-position-2 hover-img">
-                <a className="img-style">
-                  <img
-                    className=" ls-is-cached lazyloaded"
-                    data-src="/assets/images/collections/cls6.jpg"
-                    src="/assets/images/collections/cls6.jpg"
-                    alt="banner-cls"
-                  />
-                </a>
-                <div className="content">
-                  <a href="shop-collection.html" className="cls-btn">
-                    <h6 className="text">Accessories</h6>
-                    <i className="icon icon-arrowUpRight" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            {/* 7 */}
-            <div
-              className="swiper-slide"
-              role="group"
-              aria-label="7 / 8"
-              style={{ width: "321.875px", marginRight: 20 }}
-            >
-              <div className="collection-position-2 hover-img">
-                <a className="img-style">
-                  <img
-                    className=" ls-is-cached lazyloaded"
-                    data-src="/assets/images/collections/cls1.jpg"
-                    src="/assets/images/collections/cls1.jpg"
-                    alt="banner-cls"
-                  />
-                </a>
-                <div className="content">
-                  <a href="shop-collection.html" className="cls-btn">
-                    <h6 className="text">New in</h6>
-                    <i className="icon icon-arrowUpRight" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            {/* 8 */}
-            <div
-              className="swiper-slide"
-              role="group"
-              aria-label="8 / 8"
-              style={{ width: "321.875px", marginRight: 20 }}
-            >
-              <div className="collection-position-2 hover-img">
-                <a className="img-style">
-                  <img
-                    className=" ls-is-cached lazyloaded"
-                    data-src="/assets/images/collections/cls5.jpg"
-                    src="/assets/images/collections/cls5.jpg"
-                    alt="banner-cls"
-                  />
-                </a>
-                <div className="content">
-                  <a href="shop-collection.html" className="cls-btn">
-                    <h6 className="text">Bags</h6>
-                    <i className="icon icon-arrowUpRight" />
-                  </a>
-                </div>
-              </div>
-            </div>
+            {collections.map((collection, index) => (
+              <CollectionItem collection={collection} key={index} />
+            ))}
           </div>
           <span
             className="swiper-notification"

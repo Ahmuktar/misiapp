@@ -1,7 +1,7 @@
 import Footer from "@/components/website/Footer";
 import Header from "@/components/website/Header";
 import TopBar from "@/components/website/TopBar";
-
+import "aos/dist/aos.css";
 export default function WebsiteLayout({ children }) {
   return (
     <main>

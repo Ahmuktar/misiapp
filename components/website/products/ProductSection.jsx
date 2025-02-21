@@ -18,13 +18,13 @@ const ProductSection = () => {
     getProducts();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex min-h-[400px] items-center justify-center">
-        <p>Loading products...</p>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex min-h-[400px] items-center justify-center">
+  //       <p>Loading products...</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <section>
