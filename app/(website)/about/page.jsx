@@ -9,12 +9,14 @@ const AboutUsPage = () => {
       <div
         className="page-title"
         style={{
-          backgroundImage: "url(/assets/images/misi/MISI 3.jpg)",
+          backgroundImage: "url(/assets/images/misi/bags-banner.webp)",
+          backgroundPosition: "top",
+          backgroundSize: "cover",
         }}
       >
         <div className="container-full">
           <div className="row">
-            <div className="col-12">
+            <div className="col-12" data-aos="fade-up">
               <h3 className="heading text-center">About Our Store</h3>
               <ul className="breadcrumbs d-flex align-items-center justify-content-center">
                 <li>
@@ -37,7 +39,7 @@ const AboutUsPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-6 d-flex align-items-center justify-content-end">
-              <div className="wow fadeInLeft">
+              <div className="wow fadeInLeft" data-aos="fade-left">
                 <Image
                   src="/assets/images/misi/MISI 18.jpg"
                   alt="image-team"
@@ -58,11 +60,14 @@ const AboutUsPage = () => {
             </div>
             <div className="col-md-6">
               <div className="about-us-content">
-                <h3 className="title wow fadeInUp">
+                <h3 className="title wow fadeInUp" data-aos="fade-up">
                   Misi – Offering rare and beautiful items worldwide
                 </h3>
                 <div className="widget-tabs style-3">
-                  <ul className="widget-menu-tab wow fadeInUp">
+                  <ul
+                    className="widget-menu-tab wow fadeInUp"
+                    data-aos="fade-up"
+                  >
                     <li className="item-title active">
                       <span className="inner text-button">Introduction</span>
                     </li>
@@ -78,7 +83,10 @@ const AboutUsPage = () => {
                       <span className="inner text-button">Our Commitment</span>
                     </li>
                   </ul>
-                  <div className="widget-content-tab wow fadeInUp">
+                  <div
+                    className="widget-content-tab wow fadeInUp"
+                    data-aos="fade-up"
+                  >
                     <div className="widget-content-inner active">
                       <p>
                         At Misi Luxury, we believe that luxury is not just a
@@ -126,6 +134,11 @@ const AboutUsPage = () => {
                     </div>
                   </div>
                 </div>
+                <img
+                  className="lazyloaded w-full h-80 object-cover object-top rounded-2xl"
+                  src="/assets/images/misi/MISI 32.jpg"
+                  alt="store-img"
+                />
               </div>
             </div>
           </div>
@@ -150,7 +163,7 @@ const AboutUsPage = () => {
             data-pagination-md={3}
             data-pagination-lg={4}
           >
-            <div className="swiper-wrapper">
+            <div className="swiper-wrapper" data-aos="fade-up">
               <div className="swiper-slide">
                 <div className="tf-icon-box style-2">
                   <div className="icon-box">
@@ -213,11 +226,15 @@ const AboutUsPage = () => {
       {/* Testimonial */}
       <section className="flat-spacing">
         <div className="container">
-          <div className="heading-section text-center wow fadeInUp">
+          <div
+            className="heading-section text-center wow fadeInUp"
+            data-aos="fade-up"
+          >
             <h3 className="heading">Customer Review</h3>
           </div>
           <div
             dir="ltr"
+            data-aos="fade-up"
             className="swiper tf-sw-testimonial wow fadeInUp"
             data-wow-delay="0.1s"
             data-preview={3}

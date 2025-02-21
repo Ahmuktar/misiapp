@@ -1,8 +1,14 @@
+"use client";
 import Footer from "@/components/website/Footer";
 import Header from "@/components/website/Header";
 import TopBar from "@/components/website/TopBar";
+import Aos from "aos";
 import "aos/dist/aos.css";
+import { useEffect } from "react";
 export default function WebsiteLayout({ children }) {
+  useEffect(() => {
+    Aos.init({ duration: 1000, easing: "ease-in-out", once: true });
+  }, []);
   return (
     <main>
       <button id="scroll-top">

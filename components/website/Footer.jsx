@@ -75,7 +75,7 @@ const Footer = () => {
                     <div className="footer-heading text-button footer-heading-mobile">
                       Infomation
                     </div>
-                    <div className="tf-collapse-content">
+                    <div className="">
                       <ul className="footer-menu-list">
                         <li className="text-caption-1">
                           <a href="about-us.html" className="footer-menu_item">
@@ -117,7 +117,7 @@ const Footer = () => {
                     <div className="footer-heading text-button footer-heading-mobile">
                       Customer Services
                     </div>
-                    <div className="tf-collapse-content">
+                    <div className="">
                       <ul className="footer-menu-list">
                         <li className="text-caption-1">
                           <a href="#" className="footer-menu_item">

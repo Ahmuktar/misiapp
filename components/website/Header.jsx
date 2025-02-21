@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import MobileMenu from "./MobileMenu";
 // import { useAuth } from "@/stores/useAuth";
 
 function Header() {
@@ -94,7 +95,7 @@ function Header() {
                   </svg>
                 </Link>
               </li>
-              <li className="nav-account">
+              {/* <li className="nav-account">
                 <Link
                   // href={isLoggedIn ? "/dashboard" : "/login"}
                   href="/login"
@@ -124,7 +125,8 @@ function Header() {
                     />
                   </svg>
                 </Link>
-              </li>
+              </li> */}
+
               <li className="nav-wishlist">
                 <Link href="/wish-list">
                   <p className="nav-icon-item">
@@ -176,6 +178,7 @@ function Header() {
           </div>
         </div>
       </div>
+      <MobileMenu pathname={pathname} menuItems={menuItems} />
     </header>
   );
 }

@@ -101,14 +101,15 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 px-4 lg:px-0 gap-20 mb-3 items-center">
           <div className="md:col-span-2 lg:pl-28 mt-10" data-aos="fade-right">
             <h1 className="text-2xl md:text-4xl lg:w-4/5 font-bold text-primary mb-4">
-              Embrace the night with our stunning evening wear, designed for
-              those who dare to stand out in the crowd.
+              Experience the pinnacle of fashion luxury with our exclusive
+              collections.
             </h1>
             <p className="text-md">
-              Here at Flowbite we focus on markets where technology, innovation,
-              and capital can unlock long-term value and drive economic growth.
+              Our brand is synonymous with elegance and sophistication, offering
+              unparalleled quality and exclusive designs. Each piece is crafted
+              with precision and care, ensuring you receive nothing but the best
+              in luxury fashion.
             </p>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-20 my-5">
               <div
                 className="space-y-4"
