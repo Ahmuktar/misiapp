@@ -20,9 +20,11 @@ export const fetchProducts = async (limit = 4) => {
 };
 
 export const fetchAllProducts = async (filter) => {
-  const { page, limit } = filter;
   try {
-    const response = await fetch(`${API_URL}/products?page=${page}&limit=2`);
+    const url = new URLSearchParams();
+
+    console.log(url.getAll);
+    const response = await fetch(`${API_URL}/products?${filter.toString()}`);
     const data = await response.json();
     if (data.status === "success") {
       return data;

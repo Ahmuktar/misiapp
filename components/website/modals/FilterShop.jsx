@@ -1,6 +1,122 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 
 const FilterShop = () => {
+  const router = useRouter();
+
+  // State for filters
+  const [filters, setFilters] = useState({
+    min_price: 0,
+    max_price: 0,
+    size: null,
+    color: null,
+    availability: null,
+    brands: [],
+    sale: false,
+  });
+
+  // State for layout
+  const [isListActive, setIsListActive] = useState(false);
+  const [userSelectedLayout, setUserSelectedLayout] = useState(null);
+
+  // Update URL query parameters whenever filters change
+  useEffect(() => {
+    const params = new URLSearchParams();
+
+    Object.entries(filters).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach((item) => params.append(key, item));
+      } else if (value) {
+        params.set(key, value);
+      }
+    });
+
+    router.push(`/products?${params.toString()}`);
+  }, [filters, router]);
+
+  // Handle price range change
+  const handlePriceChange = (values) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      min_price: values[0],
+      max_price: values[1],
+    }));
+  };
+
+  // Handle size filter change
+  const handleSizeChange = (size) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      size: prevFilters.size === size ? null : size,
+    }));
+  };
+
+  // Handle color filter change
+  const handleColorChange = (color) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      color: prevFilters.color === color ? null : color,
+    }));
+  };
+
+  // Handle availability filter change
+  const handleAvailabilityChange = (availability) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      availability:
+        prevFilters.availability === availability ? null : availability,
+    }));
+  };
+
+  // Handle brand filter change
+  const handleBrandChange = (brandId, brandLabel) => {
+    setFilters((prevFilters) => {
+      const brandExists = prevFilters.brands.some(
+        (brand) => brand.id === brandId
+      );
+      return {
+        ...prevFilters,
+        brands: brandExists
+          ? prevFilters.brands.filter((brand) => brand.id !== brandId)
+          : [...prevFilters.brands.push(brandLabel)],
+      };
+    });
+  };
+
+  // Handle sale filter change
+  const handleSaleChange = () => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      sale: !prevFilters.sale,
+    }));
+  };
+
+  // Reset all filters
+  const handleResetFilters = () => {
+    setFilters({
+      min_price: 0,
+      max_price: 500,
+      size: null,
+      color: null,
+      availability: null,
+      brands: [],
+      sale: false,
+    });
+  };
+
+  // Handle layout switch
+  const handleLayoutSwitch = (layout) => {
+    if (layout === "list") {
+      setIsListActive(true);
+      setUserSelectedLayout(null);
+    } else {
+      setIsListActive(false);
+      setUserSelectedLayout(layout);
+    }
+  };
+
   return (
     <div className="offcanvas offcanvas-start canvas-filter" id="filterShop">
       <div className="canvas-wrapper">
@@ -13,280 +129,135 @@ const FilterShop = () => {
           />
         </div>
         <div className="canvas-body">
-          <div className="widget-facet facet-categories">
-            <h6 className="facet-title">Product Categories</h6>
-            <ul className="facet-content">
-              <li>
-                <a href="#" className="categories-item">
-                  Bags <span className="count-cate">(112)</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="categories-item">
-                  Booking <span className="count-cate">(32)</span>{" "}
-                </a>
-              </li>
-              <li>
-                <a href="#" className="categories-item">
-                  Clothing <span className="count-cate">(42)</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="categories-item active">
-                  Women <span className="count-cate">(65)</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="categories-item">
-                  Men <span className="count-cate">(13)</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="categories-item">
-                  Shoes <span className="count-cate">(52)</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="categories-item">
-                  Uncategorized <span className="count-cate">(14)</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+          {/* Price Range Filter */}
           <div className="widget-facet facet-price">
             <h6 className="facet-title">Price</h6>
-            {/* <div
-              className="price-val-range noUi-target noUi-ltr noUi-horizontal"
-              id="price-value-range"
-              data-min={0}
-              data-max={500}
-            >
-              <div className="noUi-base">
-                <div className="noUi-connects">
-                  <div
-                    className="noUi-connect"
-                    style={{ transform: "translate(0%, 0px) scale(1, 1)" }}
-                  />
-                </div>
-                <div
-                  className="noUi-origin"
-                  style={{ transform: "translate(-100%, 0px)", zIndex: 5 }}
-                >
-                  <div
-                    className="noUi-handle noUi-handle-lower"
-                    data-handle={0}
-                    tabIndex={0}
-                    role="slider"
-                    aria-orientation="horizontal"
-                    aria-valuemin={0.0}
-                    aria-valuemax={500.0}
-                    aria-valuenow={0.0}
-                    aria-valuetext={0}
-                  />
-                </div>
-                <div
-                  className="noUi-origin"
-                  style={{ transform: "translate(0%, 0px)", zIndex: 4 }}
-                >
-                  <div
-                    className="noUi-handle noUi-handle-upper"
-                    data-handle={1}
-                    tabIndex={0}
-                    role="slider"
-                    aria-orientation="horizontal"
-                    aria-valuemin={0.0}
-                    aria-valuemax={500.0}
-                    aria-valuenow={500.0}
-                    aria-valuetext={500}
-                  />
-                </div>
-              </div>
-            </div> */}
+            <Slider range min={0} max={500} onChange={handlePriceChange} />
             <div className="box-price-product">
               <div className="box-price-item">
                 <span className="title-price">Min price</span>
-                <div
-                  className="price-val"
-                  id="price-min-value"
-                  data-currency="$"
-                >
-                  0
-                </div>
+                <div className="price-val">${filters.min_price}</div>
               </div>
               <div className="box-price-item">
                 <span className="title-price">Max price</span>
-                <div
-                  className="price-val"
-                  id="price-max-value"
-                  data-currency="$"
-                >
-                  500
-                </div>
+                <div className="price-val">${filters.max_price}</div>
               </div>
             </div>
           </div>
+
+          {/* Size Filter */}
           <div className="widget-facet facet-size">
             <h6 className="facet-title">Size</h6>
             <div className="facet-size-box size-box">
-              <span className="size-item size-check">XS</span>
-              <span className="size-item size-check">S</span>
-              <span className="size-item size-check">M</span>
-              <span className="size-item size-check">L</span>
-              <span className="size-item size-check">XL</span>
-              <span className="size-item size-check">2XL</span>
-              <span className="size-item size-check">3XL</span>
-              <span className="size-item size-check free-size">Free Size</span>
+              {["XS", "S", "M", "L", "XL", "2XL", "3XL", "Free Size"].map(
+                (size) => (
+                  <span
+                    key={size}
+                    className={`size-item size-check ${
+                      filters.size === size ? "active" : ""
+                    }`}
+                    onClick={() => handleSizeChange(size)}
+                  >
+                    {size}
+                  </span>
+                )
+              )}
             </div>
           </div>
+
+          {/* Color Filter */}
           <div className="widget-facet facet-color">
             <h6 className="facet-title">Colors</h6>
             <div className="facet-color-box">
-              <div className="color-item color-check">
-                <span className="color bg-light-pink-2" />
-                Pink
-              </div>
-              <div className="color-item color-check">
-                <span className="color bg-red" /> Red
-              </div>
-              <div className="color-item color-check">
-                <span className="color bg-beige-2" />
-                Beige
-              </div>
-              <div className="color-item color-check">
-                <span className="color bg-orange-2" />
-                Orange
-              </div>
-              <div className="color-item color-check">
-                <span className="color bg-light-green" />
-                Green
-              </div>
-              <div className="color-item color-check">
-                <span className="color bg-main" />
-                Black
-              </div>
-              <div className="color-item color-check">
-                <span className="color bg-white line-black" />
-                White
-              </div>
-              <div className="color-item color-check">
-                <span className="color bg-purple-3" />
-                Purple
-              </div>
-              <div className="color-item color-check">
-                <span className="color bg-grey" />
-                Grey
-              </div>
-              <div className="color-item color-check">
-                <span className="color bg-light-blue-5" />
-                Light Blue
-              </div>
-              <div className="color-item color-check">
-                <span className="color bg-dark-blue" />
-                Dark Blue
-              </div>
+              {[
+                { value: "pink", label: "Pink", bg: "bg-light-pink-2" },
+                { value: "red", label: "Red", bg: "bg-red" },
+                { value: "beige", label: "Beige", bg: "bg-beige-2" },
+                { value: "orange", label: "Orange", bg: "bg-orange-2" },
+                { value: "green", label: "Green", bg: "bg-light-green" },
+                { value: "black", label: "Black", bg: "bg-main" },
+                { value: "white", label: "White", bg: "bg-white line-black" },
+                { value: "purple", label: "Purple", bg: "bg-purple-3" },
+                { value: "grey", label: "Grey", bg: "bg-grey" },
+                {
+                  value: "light-blue",
+                  label: "Light Blue",
+                  bg: "bg-light-blue-5",
+                },
+                { value: "dark-blue", label: "Dark Blue", bg: "bg-dark-blue" },
+              ].map((color) => (
+                <div
+                  key={color.value}
+                  className={`color-item color-check ${
+                    filters.color === color.value ? "active" : ""
+                  }`}
+                  onClick={() => handleColorChange(color.value)}
+                >
+                  <span className={`color ${color.bg}`} /> {color.label}
+                </div>
+              ))}
             </div>
           </div>
+
+          {/* Availability Filter */}
           <div className="widget-facet facet-fieldset">
             <h6 className="facet-title">Availability</h6>
             <div className="box-fieldset-item">
-              <fieldset className="fieldset-item">
+              <label>
                 <input
                   type="radio"
                   name="availability"
-                  className="tf-check"
-                  id="inStock"
+                  value="inStock"
+                  checked={filters.availability === "inStock"}
+                  onChange={() => handleAvailabilityChange("inStock")}
                 />
-                <label htmlFor="inStock">
-                  In stock <span className="count-stock">(32)</span>
-                </label>
-              </fieldset>
-              <fieldset className="fieldset-item">
+                In stock <span className="count-stock">(32)</span>
+              </label>
+              <label>
                 <input
                   type="radio"
                   name="availability"
-                  className="tf-check"
-                  id="outStock"
+                  value="outStock"
+                  checked={filters.availability === "outStock"}
+                  onChange={() => handleAvailabilityChange("outStock")}
                 />
-                <label htmlFor="outStock">
-                  Out of stock <span className="count-stock">(2)</span>
-                </label>
-              </fieldset>
+                Out of stock <span className="count-stock">(2)</span>
+              </label>
             </div>
           </div>
+
+          {/* Brand Filter */}
           <div className="widget-facet facet-fieldset">
             <h6 className="facet-title">Brands</h6>
             <div className="box-fieldset-item">
-              <fieldset className="fieldset-item">
-                <input
-                  type="checkbox"
-                  name="brand"
-                  className="tf-check"
-                  id="nike"
-                />
-                <label htmlFor="nike">
-                  Nike <span className="count-brand">(112)</span>
+              {[
+                { id: "nike", label: "Nike", count: 112 },
+                { id: "LV", label: "Louis Vuitton", count: 2 },
+                { id: "hermes", label: "Hermes", count: 42 },
+                { id: "gucci", label: "Gucci", count: 13 },
+                { id: "zalando", label: "Zalando", count: 54 },
+                { id: "adidas", label: "Adidas", count: 93 },
+              ].map((brand) => (
+                <label key={brand.id}>
+                  <input
+                    type="checkbox"
+                    name="brand"
+                    checked={filters.brands.some((b) => b.id === brand.id)}
+                    onChange={() => handleBrandChange(brand.id, brand.label)}
+                  />
+                  {brand.label}{" "}
+                  <span className="count-brand">({brand.count})</span>
                 </label>
-              </fieldset>
-              <fieldset className="fieldset-item">
-                <input
-                  type="checkbox"
-                  name="brand"
-                  className="tf-check"
-                  id="LV"
-                />
-                <label htmlFor="LV">
-                  Louis Vuitton <span className="count-brand">(2)</span>
-                </label>
-              </fieldset>
-              <fieldset className="fieldset-item">
-                <input
-                  type="checkbox"
-                  name="brand"
-                  className="tf-check"
-                  id="hermes"
-                />
-                <label htmlFor="hermes">
-                  Hermes <span className="count-brand">(42)</span>
-                </label>
-              </fieldset>
-              <fieldset className="fieldset-item">
-                <input
-                  type="checkbox"
-                  name="brand"
-                  className="tf-check"
-                  id="gucci"
-                />
-                <label htmlFor="gucci">
-                  Gucci <span className="count-brand">(13)</span>
-                </label>
-              </fieldset>
-              <fieldset className="fieldset-item">
-                <input
-                  type="checkbox"
-                  name="brand"
-                  className="tf-check"
-                  id="zalando"
-                />
-                <label htmlFor="zalando">
-                  Zalando <span className="count-brand">(54)</span>
-                </label>
-              </fieldset>
-              <fieldset className="fieldset-item">
-                <input
-                  type="checkbox"
-                  name="brand"
-                  className="tf-check"
-                  id="adidas"
-                />
-                <label htmlFor="adidas">
-                  Adidas <span className="count-brand">(93)</span>
-                </label>
-              </fieldset>
+              ))}
             </div>
           </div>
         </div>
         <div className="canvas-bottom">
-          <button id="reset-filter" className="tf-btn btn-reset">
+          <button
+            id="reset-filter"
+            className="tf-btn btn-reset"
+            onClick={handleResetFilters}
+          >
             Reset Filters
           </button>
         </div>
