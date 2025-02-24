@@ -63,7 +63,7 @@ const MyOrderDetailsPage = ({ params }) => {
           </div>
         </div>
         {orderDetails?.items.map((item) => (
-          <div className="order-head">
+          <div className="order-head" key={item.id}>
             <figure className="img-product">
               <img
                 src={`${item?.product_images[0]}`}

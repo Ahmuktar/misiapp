@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { z } from "zod";
-import { API_URL } from "@/constant";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
@@ -44,13 +43,16 @@ const RegisterPage = () => {
     if (!validate()) return;
 
     try {
-      const response = await fetch(`${API_URL}/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
       const data = await response.json();
       if (data.status === "success") {
         console.log(data);
