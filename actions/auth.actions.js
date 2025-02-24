@@ -24,7 +24,7 @@ export async function loginAdminAction(prevState, formData) {
   const { email, password } = validatedFields.data;
 
   try {
-    const res = await fetch(`${process.env.API_URL}/login`, {
+    const res = await fetch(`${process.env.API_URL}/login?userType=admin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

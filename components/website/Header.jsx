@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import MobileMenu from "./MobileMenu";
-// import { useAuth } from "@/stores/useAuth";
+import { useAuth } from "@/stores/useAuth";
+import useCartStore from "@/stores/cartStore";
 
 function Header() {
   const pathname = usePathname();
@@ -15,8 +16,8 @@ function Header() {
     { name: "Contact us", path: "/contact" },
   ];
 
-  // const { user, token, logout } = useAuth();
-  // const isLoggedIn = user !== null && token !== null;
+  const { isLoggedIn } = useAuth();
+  const { cartItems } = useCartStore();
 
   return (
     <header id="header" className="tf-slideshow header-default">
@@ -95,10 +96,10 @@ function Header() {
                   </svg>
                 </Link>
               </li>
-              {/* <li className="nav-account">
+              <li className="nav-account">
                 <Link
-                  // href={isLoggedIn ? "/dashboard" : "/login"}
-                  href="/login"
+                  href={isLoggedIn ? "/dashboard" : "/login"}
+                  // href="/login"
                   className="nav-icon-item"
                 >
                   <svg
@@ -125,7 +126,7 @@ function Header() {
                     />
                   </svg>
                 </Link>
-              </li> */}
+              </li>
 
               <li className="nav-wishlist">
                 <Link href="/wish-list">
@@ -171,7 +172,7 @@ function Header() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <span className="count-box">1</span>
+                  <span className="count-box">{cartItems.length}</span>
                 </Link>
               </li>
             </ul>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
@@ -6,115 +6,67 @@ import "rc-slider/assets/index.css";
 const FilterShop = () => {
   const router = useRouter();
 
-  // State for filters
-  const [filters, setFilters] = useState({
-    min_price: 0,
-    max_price: 0,
-    size: null,
-    color: null,
-    availability: null,
-    brands: [],
-    sale: false,
-  });
-
-  // State for layout
-  const [isListActive, setIsListActive] = useState(false);
-  const [userSelectedLayout, setUserSelectedLayout] = useState(null);
-
   // Update URL query parameters whenever filters change
-  useEffect(() => {
+  const updateFilters = (newFilters) => {
     const params = new URLSearchParams();
 
-    Object.entries(filters).forEach(([key, value]) => {
+    Object.entries(newFilters).forEach(([key, value]) => {
       if (Array.isArray(value)) {
         value.forEach((item) => params.append(key, item));
-      } else if (value) {
+      } else if (value !== null && value !== undefined && value !== "") {
         params.set(key, value);
       }
     });
 
-    router.push(`/products?${params.toString()}`);
-  }, [filters, router]);
+    router.push(`/products?${params ? params.toString() : ""}`);
+  };
 
   // Handle price range change
   const handlePriceChange = (values) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
+    updateFilters({
       min_price: values[0],
       max_price: values[1],
-    }));
+    });
   };
 
   // Handle size filter change
   const handleSizeChange = (size) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      size: prevFilters.size === size ? null : size,
-    }));
+    updateFilters({
+      size,
+    });
   };
 
   // Handle color filter change
   const handleColorChange = (color) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      color: prevFilters.color === color ? null : color,
-    }));
+    updateFilters({
+      color,
+    });
   };
 
   // Handle availability filter change
   const handleAvailabilityChange = (availability) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      availability:
-        prevFilters.availability === availability ? null : availability,
-    }));
+    updateFilters({
+      availability,
+    });
   };
 
   // Handle brand filter change
   const handleBrandChange = (brandId, brandLabel) => {
-    setFilters((prevFilters) => {
-      const brandExists = prevFilters.brands.some(
-        (brand) => brand.id === brandId
-      );
-      return {
-        ...prevFilters,
-        brands: brandExists
-          ? prevFilters.brands.filter((brand) => brand.id !== brandId)
-          : [...prevFilters.brands.push(brandLabel)],
-      };
+    updateFilters({
+      brands: [{ id: brandId, label: brandLabel }],
     });
   };
 
   // Handle sale filter change
   const handleSaleChange = () => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      sale: !prevFilters.sale,
-    }));
+    updateFilters({
+      sale: true,
+    });
   };
 
   // Reset all filters
   const handleResetFilters = () => {
-    setFilters({
-      min_price: 0,
-      max_price: 500,
-      size: null,
-      color: null,
-      availability: null,
-      brands: [],
-      sale: false,
-    });
-  };
-
-  // Handle layout switch
-  const handleLayoutSwitch = (layout) => {
-    if (layout === "list") {
-      setIsListActive(true);
-      setUserSelectedLayout(null);
-    } else {
-      setIsListActive(false);
-      setUserSelectedLayout(layout);
-    }
+    updateFilters({});
   };
 
   return (
@@ -136,11 +88,11 @@ const FilterShop = () => {
             <div className="box-price-product">
               <div className="box-price-item">
                 <span className="title-price">Min price</span>
-                <div className="price-val">${filters.min_price}</div>
+                <div className="price-val">$0</div>
               </div>
               <div className="box-price-item">
                 <span className="title-price">Max price</span>
-                <div className="price-val">${filters.max_price}</div>
+                <div className="price-val">$500</div>
               </div>
             </div>
           </div>
@@ -153,9 +105,7 @@ const FilterShop = () => {
                 (size) => (
                   <span
                     key={size}
-                    className={`size-item size-check ${
-                      filters.size === size ? "active" : ""
-                    }`}
+                    className="size-item size-check"
                     onClick={() => handleSizeChange(size)}
                   >
                     {size}
@@ -188,9 +138,7 @@ const FilterShop = () => {
               ].map((color) => (
                 <div
                   key={color.value}
-                  className={`color-item color-check ${
-                    filters.color === color.value ? "active" : ""
-                  }`}
+                  className="color-item color-check"
                   onClick={() => handleColorChange(color.value)}
                 >
                   <span className={`color ${color.bg}`} /> {color.label}
@@ -208,7 +156,6 @@ const FilterShop = () => {
                   type="radio"
                   name="availability"
                   value="inStock"
-                  checked={filters.availability === "inStock"}
                   onChange={() => handleAvailabilityChange("inStock")}
                 />
                 In stock <span className="count-stock">(32)</span>
@@ -218,7 +165,6 @@ const FilterShop = () => {
                   type="radio"
                   name="availability"
                   value="outStock"
-                  checked={filters.availability === "outStock"}
                   onChange={() => handleAvailabilityChange("outStock")}
                 />
                 Out of stock <span className="count-stock">(2)</span>
@@ -242,7 +188,6 @@ const FilterShop = () => {
                   <input
                     type="checkbox"
                     name="brand"
-                    checked={filters.brands.some((b) => b.id === brand.id)}
                     onChange={() => handleBrandChange(brand.id, brand.label)}
                   />
                   {brand.label}{" "}

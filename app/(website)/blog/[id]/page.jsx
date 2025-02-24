@@ -1,35 +1,26 @@
-"use client";
-import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-const SingleBlog = () => {
-  const params = useParams();
-  const blogId = params.id;
+const fetchBlog = async (blogId) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/blog/${blogId}`
+    );
+    const data = await response.json();
+    if (data.status === "success") {
+      return data.data;
+    }
+  } catch (error) {
+    console.error("Error fetching blog:", error);
+  }
+};
 
-  const [blogs, setBlogs] = useState(null);
+const SingleBlog = async ({ params }) => {
+  const { id } = params;
+  const blogs = await fetchBlog(id);
 
-  useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/blog/${blogId}`
-        );
-        const data = await response.json();
-        if (data.status === "success") {
-          setBlogs(data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching blog:", error);
-      }
-    };
-
-    fetchBlog();
-  }, [blogId]);
   return (
     <div className="blog-detail-wrap">
       <img

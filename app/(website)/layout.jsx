@@ -1,6 +1,8 @@
 "use client";
 import Footer from "@/components/website/Footer";
 import Header from "@/components/website/Header";
+import ShoppingCart from "@/components/website/modals/ShoppingCart";
+import SizeGuide from "@/components/website/modals/SizeGuide";
 import TopBar from "@/components/website/TopBar";
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -47,6 +49,8 @@ export default function WebsiteLayout({ children }) {
         {children}
         <Footer />
         {/* <ToolbarBottom /> */}
+        <ShoppingCart />
+        <SizeGuide />
       </div>
     </main>
   );

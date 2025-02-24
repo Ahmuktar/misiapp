@@ -1,6 +1,6 @@
 const ProductCardSkeleton = () => {
   return (
-    <div className="tf-grid-layout md-col-3">
+    <div className="tf-grid-layout md-col-4">
       {Array.from({ length: 6 }).map((_, index) => (
         <div className="wg-blog style-1 hover-image animate-pulse" key={index}>
           <div className="image bg-gray-300 w-full h-80 rounded-md"></div>

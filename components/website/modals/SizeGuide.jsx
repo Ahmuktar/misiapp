@@ -88,20 +88,6 @@ const SizeGuide = () => {
                       <h5>plump</h5>
                     </div>
                   </div>
-                  <div>
-                    <h6 className="suggests-title">Modave suggests for you:</h6>
-                    <div className="suggests-list">
-                      <a href="#" className="suggests-item link text-button">
-                        L - shirt
-                      </a>
-                      <a href="#" className="suggests-item link text-button">
-                        XL - Pant
-                      </a>
-                      <a href="#" className="suggests-item link text-button">
-                        31 - Jeans
-                      </a>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div className="widget-content-inner">

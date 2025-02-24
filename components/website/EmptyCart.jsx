@@ -1,4 +1,5 @@
 import { ShoppingCart } from "lucide-react";
+import Link from "next/link";
 
 function EmptyCart() {
   return (
@@ -22,24 +23,12 @@ function EmptyCart() {
         to fill it with amazing products!
       </p>
 
-      <button className="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+      <Link
+        href="/products"
+        className="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-main rounded-md shadow-sm hover:bg-main focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      >
         Start Shopping
-      </button>
-
-      <div className="mt-8 space-y-4 text-sm text-gray-500">
-        <p className="flex items-center justify-center">
-          <span className="mr-2">•</span>
-          Free shipping on orders over $50
-        </p>
-        <p className="flex items-center justify-center">
-          <span className="mr-2">•</span>
-          30-day easy returns
-        </p>
-        <p className="flex items-center justify-center">
-          <span className="mr-2">•</span>
-          Secure checkout
-        </p>
-      </div>
+      </Link>
     </div>
   );
 }

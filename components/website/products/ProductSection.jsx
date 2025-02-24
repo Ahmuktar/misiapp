@@ -2,20 +2,19 @@
 import { Box } from "lucide-react";
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
-import { fetchProducts } from "@/utils/api";
 
 const ProductSection = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getProducts = async () => {
-      const products = await fetchProducts();
-      setProducts(products.data.products);
-      setLoading(false);
-    };
+    // const getProducts = async () => {
+    //   const products = await fetchProducts();
+    //   setProducts(products.data.products);
+    //   setLoading(false);
+    // };
 
-    getProducts();
+    // getProducts();
   }, []);
 
   // if (loading) {

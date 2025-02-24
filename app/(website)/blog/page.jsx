@@ -1,41 +1,23 @@
-"use client";
 import EmptyBlog from "@/components/website/EmptyBlog";
 import BlogList from "@/components/website/BlogList";
 import Link from "next/link";
-import React, { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import BlogSkeleton from "@/components/skeleton/BlogSkeleton";
 
-const BlogPage = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+const fetchBlog = async () => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+    const data = await response.json();
+    if (data.status === "success") {
+      return data.data;
+    }
+  } catch (error) {
+    console.error("Error fetching blog:", error);
+  }
+};
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const fetchBlogs = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/blog`,
-          {
-            signal: controller.signal,
-          }
-        );
-        if (!response.ok) throw new Error("Failed to fetch blogs");
-        const data = await response.json();
-        setBlogs(data.data);
-      } catch (error) {
-        if (error.name !== "AbortError") {
-          console.error(error);
-          setError(true);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBlogs();
-    return () => controller.abort();
-  }, []);
+const BlogPage = async () => {
+  const blogs = await fetchBlog();
 
   return (
     <>
@@ -69,13 +51,7 @@ const BlogPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 mb-lg-30">
-              {error ? (
-                <p className="text-center text-red-500">
-                  Failed to load blogs. Please try again later.
-                </p>
-              ) : loading ? (
-                <BlogSkeleton />
-              ) : blogs.length === 0 ? (
+              {!blogs ? (
                 <EmptyBlog />
               ) : (
                 <Suspense fallback={<BlogSkeleton />}>

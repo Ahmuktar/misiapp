@@ -8,6 +8,7 @@ import "@/public/assets/css/bootstrap-select.min.css";
 import "@/public/assets/css/sib-styles.css";
 import "./globals.css";
 import Script from "next/script";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,6 +54,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Toaster position="top-right" />
         <Script src="/assets/js/bootstrap.min.js" />
         <Script src="/assets/js/jquery.min.js" />
         <Script src="/assets/js/swiper-bundle.min.js" />
